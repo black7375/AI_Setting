@@ -30,7 +30,9 @@ RUN pip3 install --no-cache-dir  \
 EXPOSE 6006
 
 # -- Server Packages -------------------------
-RUN apt-get -y -qq install --no-install-recommends openjdk-8-jdk && \
+RUN apt-get -y -qq install --no-install-recommends
+        openjdk-8-jdk \
+        apache2 && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 RUN pip3 install --no-cache-dir  \
@@ -39,6 +41,8 @@ RUN pip3 install --no-cache-dir  \
         pyarrow       \
         flask-restful \
         boilerpipe3
+
+RUN /etc/init.d/apache2 start
 
 # -- Font Packages (for ascii2hangul) -------------
 RUN pip3 install --no-cache-dir \
