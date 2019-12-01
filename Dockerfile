@@ -38,7 +38,9 @@ RUN pip3 install --no-cache-dir  \
         gensim        \
         pyarrow       \
         flask-restful \
-        boilerpipe3
+        boilerpipe3   \
+        konlpy
+RUN bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 
 # -- Font Packages (for ascii2hangul) -------------
 RUN pip3 install --no-cache-dir \
