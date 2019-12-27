@@ -9,6 +9,9 @@ else
     sudo docker rm `sudo docker ps -aq`
     sudo docker rmi hello-world
     echo "Now, Docker Installed."
+
+    echo "Add Docker Usergroup..."
+    sudo usermod -aG docker $USER
 fi
 
 echo "========== Nvidia Docker Install =========="
