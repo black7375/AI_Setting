@@ -15,3 +15,6 @@ bash ./AI_Setting/environment.sh
 
 *** 4. Enjoy AI Setting!!
 You can use the AI Environment with the command '=dpython='!!
+
+** Docker Hub
+https://hub.docker.com/r/alstjr7375/typed
