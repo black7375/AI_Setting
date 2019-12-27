@@ -33,6 +33,8 @@ fi
 echo "========== Download Typed Docker =========="
 docker pull alstjr7375/typed
 
+
+echo "========== Set Alias =========="
 set_file()
 {
   local file=$1
