@@ -33,4 +33,22 @@ fi
 echo "========== Download Typed Docker =========="
 docker pull alstjr7375/typed
 
-echo "alias dpython='docker run --rm -i -t -v $(pwd):/ai  alstjr7375/typed python'" >> ~/.bashrc
+set_file()
+{
+  local file=$1
+  echo "-------"
+  echo "Set $file !!"
+  echo ""
+  if [ -e $file ]; then
+    echo ""
+  else
+    echo "$file not found."
+    touch $file
+    echo "$file is created"
+    echo "alias dpython='docker run --rm -i -t -v $(pwd):/ai  alstjr7375/typed python'" >> $file
+    echo ""
+  fi
+}
+
+set_file ~/.bashrc
+set_file ~/.zshrc
