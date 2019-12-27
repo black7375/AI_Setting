@@ -29,3 +29,5 @@ fi
 
 echo "========== Download Typed Docker =========="
 docker pull alstjr7375/typed
+
+echo "alias dpython='docker run --rm -i -t -v $(pwd):/ai  alstjr7375/typed python'" >> ~/.bashrc
