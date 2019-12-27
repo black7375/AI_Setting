@@ -13,9 +13,11 @@ RUN  apt-get -y -qq update &&  \
 # -- AI Packages -------------------------
 WORKDIR /ai
 RUN apt-get -y -qq --no-install-recommends install \
-        python3-pip        \
+        python3-pip         \
         # cuda
-        nvidia-cuda-toolkit
+        nvidia-cuda-toolkit \
+        curl                \
+        git
 
 RUN pip3 install --no-cache-dir  \
         keras      \
@@ -30,9 +32,9 @@ RUN pip3 install --no-cache-dir  \
 EXPOSE 6006
 
 # -- Server Packages -------------------------
-RUN apt-get -y -qq install --no-install-recommends
-        openjdk-8-jdk \
-        apache2 && \
+RUN apt-get -y -qq install --no-install-recommends \
+        openjdk-8-jdk    \
+        apache2       && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 RUN pip3 install --no-cache-dir  \
@@ -43,7 +45,8 @@ RUN pip3 install --no-cache-dir  \
         boilerpipe3   \
         konlpy
 RUN /etc/init.d/apache2 start && \
-        bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
+        bash <(curl -s \
+        https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 
 # -- Font Packages (for ascii2hangul) -------------
 RUN pip3 install --no-cache-dir \
