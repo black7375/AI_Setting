@@ -1,0 +1,17 @@
+* AI Setting
+** How to use??
+
+*** 1. Git clone AI Setting at target computer.
+#+BEGIN_SRC shell
+git clone https://github.com/black7375/AI_Setting.git
+#+END_SRC
+
+*** 2. Run =environment.sh=.
+#+BEGIN_SRC shell
+bash ./AI_Setting/environment.sh
+#+END_SRC
+
+*** 3. Relogin
+
+*** 4. Enjoy AI Setting!!
+You can use the AI Environment with the command '=dpython='!!
