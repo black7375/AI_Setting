@@ -31,7 +31,7 @@ else
 fi
 
 echo "========== Download Typed Docker =========="
-docker pull alstjr7375/typed
+sudo docker pull alstjr7375/typed
 
 
 echo "========== Set Alias =========="
