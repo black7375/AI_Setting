@@ -33,8 +33,7 @@ EXPOSE 6006
 
 # -- Server Packages -------------------------
 RUN apt-get -y -qq install --no-install-recommends \
-        openjdk-8-jdk    \
-        apache2       && \
+        openjdk-8-jdk && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 RUN pip3 install --no-cache-dir  \
@@ -44,8 +43,7 @@ RUN pip3 install --no-cache-dir  \
         flask-restful \
         boilerpipe3   \
         konlpy
-RUN /etc/init.d/apache2 start && \
-        bash <(curl -s \
+RUN bash <(curl -s \
         https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 
 # -- Font Packages (for ascii2hangul) -------------
