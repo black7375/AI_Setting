@@ -17,16 +17,19 @@ RUN apt-get -y -qq --no-install-recommends install \
         # cuda
         nvidia-cuda-toolkit \
         curl                \
-        git
+        git                 \
+        graphviz
 
 RUN pip3 install --no-cache-dir  \
-        keras      \
-        sklearn    \
-        numpy      \
-        pandas     \
-        h5py       \
-        image      \
-        matplotlib
+        keras         \
+        sklearn       \
+        sentencepiece \
+        numpy         \
+        pandas        \
+        h5py          \
+        image         \
+        matplotlib    \
+        pydot
 
 # Port for Tensorboard
 EXPOSE 6006
