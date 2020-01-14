@@ -1,8 +1,10 @@
-echo "========== Docker Install =========="
-echo "Check Docker Installed.."
-if type docker &>/dev/null; then
+docker-install()
+{
+  echo "========== Docker Install =========="
+  echo "Check Docker Installed.."
+  if type docker &>/dev/null; then
     echo "Docker Already Installed."
-else
+  else
     echo "Installing Docker..."
     sudo wget -qO- https://get.docker.com/ | sh
     echo "Setting Docker..."
@@ -12,13 +14,28 @@ else
 
     echo "Add Docker Usergroup..."
     sudo usermod -aG docker $USER
-fi
+  fi
+}
 
-echo "========== Nvidia Docker Install =========="
-echo "Check Nvidia Docker Installed.."
-if type nvidia-docker &>/dev/null; then
+check-gpu()
+{
+  echo "========== Check Nvidia Gpu =========="
+  if type nvidia-smi &>/dev/null; then
+    echo "GPU Detected!!"
+    gpu-detected=true
+  else
+    echo "No Detected"
+    gpu-detected=false
+  fi
+}
+
+nvidia-docker-install()
+{
+  echo "========== Nvidia Docker Install =========="
+  echo "Check Nvidia Docker Installed.."
+  if type nvidia-docker &>/dev/null; then
     echo "Docker Already Installed."
-else
+  else
     echo "Installing Nvidia Docker..."
     distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
     curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
@@ -28,16 +45,20 @@ else
     echo "Setting Nvidia Docker..."
     sudo systemctl restart docker
     echo "Now, Nvidia Docker Installed."
-fi
+  fi
+}
 
-echo "========== Download Typed Docker =========="
-sudo docker pull alstjr7375/typed
+pull-image()
+{
+  echo "========== Download Typed Docker =========="
+  local tag=$1
+  sudo docker pull alstjr7375/typed:${tag}
+}
 
-
-echo "========== Set Alias =========="
-set_file()
+set-file()
 {
   local file=$1
+  local tag=$2
   echo "-------"
   echo "Set $file !!"
   echo ""
@@ -47,10 +68,30 @@ set_file()
     echo "$file not found."
     touch $file
     echo "$file is created"
-    echo "alias dpython='docker run --rm -i -t -v $(pwd):/ai  alstjr7375/typed python'" >> $file
+    echo "alias dpython='docker run --rm -i -t -v \$(pwd):/ai  alstjr7375/typed:${tag} python'" >> $file
     echo ""
   fi
 }
 
-set_file ~/.bashrc
-set_file ~/.zshrc
+set-alias()
+{
+  echo "========== Set Alias =========="
+  local tag=$1
+  set-file ~/.bashrc $tag
+  set-file ~/.zshrc  $tag
+}
+
+main()
+{
+  docker-install
+  check-gpu
+  if gpu-detected ; then
+    nvidia-docker-install
+    tag=latest
+  else
+    tag=latest-nogpu
+  fi
+
+  pull-image $tag
+  set-alias  $tag
+}
