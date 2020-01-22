@@ -54,3 +54,7 @@ RUN pip3 install --no-cache-dir \
         fonttools \
         zopfli    \
         brotli
+
+RUN pip3 install --no-cache-dir \
+        keras-rl  \
+        git+https://www.github.com/keras-team/keras-contrib.git
