@@ -17,18 +17,6 @@ docker-install()
   fi
 }
 
-check-gpu()
-{
-  echo "========== Check Nvidia Gpu =========="
-  if type nvidia-smi &>/dev/null; then
-    echo "GPU Detected!!"
-    gpu-detected=true
-  else
-    echo "No Detected"
-    gpu-detected=false
-  fi
-}
-
 nvidia-docker-install()
 {
   echo "========== Nvidia Docker Install =========="
@@ -84,8 +72,9 @@ set-alias()
 main()
 {
   docker-install
+  source ./check.sh
   check-gpu
-  if gpu-detected ; then
+  if $gpu_detected ; then
     nvidia-docker-install
     tag=latest
   else
@@ -95,3 +84,5 @@ main()
   pull-image $tag
   set-alias  $tag
 }
+
+main
