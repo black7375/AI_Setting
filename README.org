@@ -16,5 +16,13 @@ bash ./AI_Setting/environment.sh
 *** 4. Enjoy AI Setting!!
 You can use the AI Environment with the command '=dpython='!!
 
+** Want to build and use it yourself?
+Check =./build.sh=
+*** option
+- =a=: All version(gpu, no gpu) build
+- =l=: Build to latest version
+- =p=: Build after push
+- =n=: Build with no cache
+
 ** Docker Hub
 https://hub.docker.com/r/alstjr7375/typed
